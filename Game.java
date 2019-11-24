@@ -54,12 +54,6 @@ public class Game extends Application {
                     input.remove( code );
                 }
             });
-
-//	    gc.setFill( Color.RED );
-//	    gc.setStroke( Color.BLACK );
-//	    gc.setLineWidth(2);
-//	    gc.fillText( "Hello, World!", 60, 50 );
-//	    gc.strokeText( "Hello, World!", 60, 50 );
 		
 		gc.drawImage(person.getSprite(),100,100);
 	    
