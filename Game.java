@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.io.*;
 import javafx.application.Application;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -25,41 +25,44 @@ public class Game extends Application {
 	    
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	    
-	    Image spr = new Image("file:///C:\\Users\\erich\\eclipse-workspace\\Kitkhan-Maniac\\src\\coloredsprite.png");
-	    
-		Player person = new Player(0,0,0,0,0,0,spr);
-		
-	    ArrayList<String> input = new ArrayList<String>();
+	    Image spr;
+		try {
+			spr = new Image(new FileInputStream("src/Sprites/sprite-hero.png"));
+			Player person = new Player(0,0,0,0,0,0,spr);
+			gc.drawImage(person.getSprite(),100,100);
+		    
+			primaryStage.setTitle("Kitkhan Maniac");
+		    primaryStage.setScene(scene);
+		    primaryStage.show();
 
-        scene.setOnKeyPressed(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
-                    String code = e.getCode().toString();
-                    if (!input.contains(code)) {
-                        input.add(code);
-                        person.move(code);
-                		gc.drawImage(person.getSprite(),person.getPosX(),person.getPosY());
-                    }
-                }
-            });
+		    ArrayList<String> input = new ArrayList<String>();
 
-        scene.setOnKeyReleased(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
-                    String code = e.getCode().toString();
-                    input.remove( code );
-                }
-            });
-		
-		gc.drawImage(person.getSprite(),100,100);
-	    
-		primaryStage.setTitle("Kitkhan Maniac");
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
+	        scene.setOnKeyPressed(
+	            new EventHandler<KeyEvent>()
+	            {
+	                public void handle(KeyEvent e)
+	                {
+	                    String code = e.getCode().toString();
+	                    if (!input.contains(code)) {
+	                        input.add(code);
+	                        person.move(code);
+	                		gc.drawImage(person.getSprite(),person.getPosX(),person.getPosY());
+	                    }
+	                }
+	            });
+
+	        scene.setOnKeyReleased(
+	            new EventHandler<KeyEvent>()
+	            {
+	                public void handle(KeyEvent e)
+	                {
+	                    String code = e.getCode().toString();
+	                    input.remove( code );
+	                }
+	            });
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 	}
 
    	public static void main(String[] args) {
