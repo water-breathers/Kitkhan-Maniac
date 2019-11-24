@@ -1,3 +1,4 @@
+import javafx.scene.input.*;
 
 public abstract class Mortals {
 
@@ -23,4 +24,53 @@ public abstract class Mortals {
 		this.posX = posX;
 		this.posY = posY;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public float getHealth() {
+		return health;
+	}
+
+	public float getDamage() {
+		return damage;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public float getPosX() {
+		return posX;
+	}
+
+	public float getPosY() {
+		return posY;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void move(String e) {
+		switch (e.toLowerCase()) {
+			case("w"):
+				--posY;
+				break;
+			case("s"):
+				++posY;
+				break;
+			case("d"):
+				++posX;
+				break;
+			case("a"):
+				--posX;
+				break;
+			default:
+				break;
+		}
+		System.out.println("(" + posX + "," + posY + ")");
+	}
+	
 }
